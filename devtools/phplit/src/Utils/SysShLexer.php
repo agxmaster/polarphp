@@ -115,7 +115,7 @@ class SysShLexer
       $this->lineNo = 1;
       if ($this->debug) {
          if ($newFile != null) {
-            printf('shlex: pushing to file %s', $this->infile);
+            printf('shlex: pushing to file %s', $this->inFile);
          } else {
             printf('shlex: pushing to stream %s', $this->inStream);
          }

@@ -12,6 +12,8 @@
 
 namespace Lit\Shell;
 
+use Lit\Exception\ValueException;
+
 class PipelineCommand extends AbstractCommand
 {
    /**

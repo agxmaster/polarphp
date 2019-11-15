@@ -111,7 +111,7 @@ class TestRunner
       // Re-run failed tests up to test_retry_attempts times.
       $attempts = 1;
       if ($test->getConfig()->hasExtraConfig('test_retry_attempts')) {
-         $attempts += (int)$test->getConfig()->getExtraConfig('test_retry_attempts');
+         $attempts += (int)$test->getConfig()->getExtraConfig('test_retry_attempts', []);
       }
       for ($index = 0; $index < $attempts; ++$index) {
          $result = $this->doExecuteTest($test, $script, $tempBase);
@@ -543,7 +543,7 @@ class TestRunner
                if (is_string($arg) && has_substr($arg, self::DEV_NULL)) {
                   $tfilename = make_temp_file(PHPLIT_TEMP_PREFIX);
                   $namedTempFiles[] = $tfilename;
-                  $args[$argIndex] = str_replace(self::DEV_NULL, $tfilename);
+                  $args[$argIndex] = str_replace(self::DEV_NULL, $tfilename, $arg);
                }
             }
             $pcmd->setArgs($args);
@@ -611,8 +611,8 @@ class TestRunner
          // Ensure the resulting output is always of string type.
          $outputFiles = [];
          if ($result != 0) {
-            foreach ($openedFiles as $entry) {
-               list($name, $mode, $file, $path) = $entry;
+            foreach ($openedFiles as $entryFile) {
+               list($name, $mode, $file, $path) = $entryFile;
                if ($path != null && in_array($mode, ['w', 'a'])) {
                   $file = fopen($path, 'rb');
                   $data = stream_get_contents($file);
