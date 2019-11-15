@@ -11,7 +11,7 @@
 // Created by polarboy on 2019/10/11.
 namespace Lit\Format;
 
-use \Lit\Exception\NotImplementedException;
+use Lit\Exception\NotImplementedException;
 use Lit\Kernel\TestCase;
 use Lit\Kernel\TestingConfig;
 use Lit\Kernel\TestResultCode;
